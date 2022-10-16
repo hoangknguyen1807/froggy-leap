@@ -22,7 +22,7 @@ let pepes = [...greenStartPos, false, ...yellowStartPos];
 
 let currentIdx = -1;
 
-let yVel = 0, xVel = 0, step = 0;
+let yMoving = 500, yVel = 0, xVel = 0, step = 0;
 const groundY = 634, gravity = 5;
 
 const myp5 = new p5(() => { }, document.getElementById('p5_view'));
@@ -48,6 +48,11 @@ myp5.preload = () => {
 
 myp5.setup = () => {
   myp5.createCanvas(1360, 760);
+  // myp5.createCanvas(myp5.windowWidth - 300, myp5.windowHeight - 100);
+}
+
+myp5.windowResized = () => {
+  // myp5.resizeCanvas(myp5.windowWidth - 300, myp5.windowHeight - 100);
 }
 
 myp5.draw = () => {
@@ -65,6 +70,7 @@ myp5.draw = () => {
         }
 
         pepe.y += yVel;
+        yMoving = pepe.y;
         yVel /= 1.2;
 
         if (xVel > 0) {
@@ -121,6 +127,8 @@ const jumpLeft = (index) => {
 }
 
 myp5.mousePressed = () => {
+  if (yMoving + 134 < groundY || xVel !== 0) return false;
+
   let idx = pepes.findIndex((e) => {
     if (!e) return false;
     const xT = e.x;
@@ -130,6 +138,7 @@ myp5.mousePressed = () => {
     return xT <= myp5.mouseX && myp5.mouseX <= xB
       && yL <= myp5.mouseY && myp5.mouseY <= yR;
   });
+
   if (pepes[idx]) {
     if (pepes[idx].color === 'green') {
       if (idx + 1 >= pepes.length) {
