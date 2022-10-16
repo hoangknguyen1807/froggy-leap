@@ -1,0 +1,12 @@
+.root {
+  top: 5px;
+  display: flex;
+  justify-content: center;
+  background-color: beige;
+}
+
+#p5-view {
+  position: absolute;
+  z-index: 1;
+  border: 1px solid black;
+}
