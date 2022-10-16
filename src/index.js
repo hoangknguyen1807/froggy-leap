@@ -71,7 +71,7 @@ myp5.draw = () => {
 
         pepe.y += yVel;
         yMoving = pepe.y;
-        yVel /= 1.2;
+        yVel /= 1.15;
 
         if (xVel > 0) {
           pepe.x += step;
@@ -97,21 +97,15 @@ myp5.draw = () => {
 }
 
 const slideRight = (index, diff) => {
-  xVel = 196;
-  if (diff == 2) {
-    xVel *= 2;
-  }
-  step = xVel / 50;
+  xVel = 196 * diff;
+  step = xVel / 54;
   swap(pepes, index, index + diff);
   currentIdx = index + diff;
 }
 
 const slideLeft = (index, diff) => {
-  xVel = -196;
-  if (diff == 2) {
-    xVel *= 2;
-  }
-  step = xVel / 50;
+  xVel = -196 * diff;
+  step = xVel / 54;
   swap(pepes, index - diff, index);
   currentIdx = index - diff;
 }
